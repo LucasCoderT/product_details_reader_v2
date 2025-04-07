@@ -25,6 +25,7 @@ from constants import (
 )
 
 from cenums import Files
+from exceptions import NoSkuColumnsFound
 from my_types import MappedCell
 from output import OUTPUT_MAPPED_CELLS
 from tkinter import ttk
@@ -63,9 +64,11 @@ def load_file(fp: pathlib.Path) -> pl.DataFrame:
     return pl.read_excel(fp)
 
 
-def filter_dataframe(df: pl.DataFrame, values: list) -> pl.DataFrame:
+def filter_dataframe(df: pl.DataFrame, values: list, *, name: str = None) -> pl.DataFrame:
     # Identify columns that contain the substring 'sku'
     columns = [col for col in df.columns if SKU_SUBSTR in col.lower()]
+    if not columns:
+        raise NoSkuColumnsFound(name, columns)
 
     # Create a new column \`__SKU__\` that captures the matched SKU
     df = df.with_columns(
@@ -185,9 +188,9 @@ def main(
 
 
     # Filter inventory_file for rows that have any matching sku columns from the skus variable
-    filtered_restock_report = call_with_progress(filter_dataframe, progress_bar, restock_report, skus)
-    filtered_inventory = call_with_progress(filter_dataframe, progress_bar, inventory_file, skus)
-    filtered_feed_visor = call_with_progress(filter_dataframe, progress_bar, feed_visor_processor, skus)
+    filtered_restock_report = call_with_progress(filter_dataframe, progress_bar, restock_report, skus, name=Files.RESTOCK_REPORT)
+    filtered_inventory = call_with_progress(filter_dataframe, progress_bar, inventory_file, skus, name=Files.INVENTORY_FILE)
+    filtered_feed_visor = call_with_progress(filter_dataframe, progress_bar, feed_visor_processor, skus, name=Files.FEED_VIZOR_PROCESSOR)
 
 
     # Create a dict of Files enum to DataFrame
