@@ -60,7 +60,7 @@ def load_file(fp: pathlib.Path) -> pl.DataFrame:
     print(f"Reading {fp.name}")
     if not fp.exists():
         raise FileNotFoundError(f"File {fp} does not exist.")
-    return pl.read_excel(fp, engine="openpyxl")
+    return pl.read_excel(fp)
 
 
 def filter_dataframe(df: pl.DataFrame, values: list) -> pl.DataFrame:
