@@ -115,7 +115,12 @@ def create_output_dataframe(dataframes: dict, mapped_cells: list[MappedCell]) ->
             column_name = cell.get("original_column_name")
             if f"{column_name}{suffix}" in merged.columns:
                 column_name = f"{column_name}{suffix}"
-            col_expressions.append(pl.col(column_name).alias(target_name))
+            col_exp = pl.col(column_name)
+            if cast := cell.get("dtype"):
+                col_exp = col_exp.cast(cast)
+                if cast == pl.Float64:
+                    col_exp = col_exp.round(2)
+            col_expressions.append(col_exp.alias(target_name))
         else:
             # If there's no file_name, set it to None or handle processing as needed
             col_expressions.append(pl.lit(None).alias(target_name))
