@@ -18,7 +18,7 @@ jobs:
       run: uv sync --all-extras --dev
     - name: build
       run: |
-        uv run pyinstaller --noconfirm --onefile --windowed "ui.py" --hiddenimport openpyxl --hiddenimport fastexcel
+        uv run pyinstaller --noconfirm --onefile --windowed "ui.py" --hiddenimport openpyxl --hiddenimport fastexcel --name "reader.exe"
     - uses: actions/upload-artifact@v4
       with:
         name: reader
