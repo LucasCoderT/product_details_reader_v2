@@ -18,7 +18,7 @@ jobs:
       run: uv sync --all-extras --dev
     - name: build
       run: |
-        uv run pyinstaller --noconfirm --onefile --windowed "ui.py" --exclude-module "tests" --specpath "dist" --distpath "dist" --workpath "build" --name "ui.exe"
+        uv run pyinstaller --noconfirm --onefile --windowed "ui.py" --exclude-module "tests" --specpath "dist" --distpath "dist" --workpath "build" --name "reader.exe"
     - uses: actions/upload-artifact@v4
       with:
         name: reader.exe
