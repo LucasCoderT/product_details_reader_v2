@@ -1,0 +1,21 @@
+# constants.py
+
+LOGGING_FASEXCEL_TYPES_DTYPE = 'fastexcel.types.dtype'
+LOOKUP_COLUMN = 'Merchant SKU'
+HIDDEN_SKU_COLUMN = '__SKU__'
+SKU_SUBSTR = 'sku'
+SHEET_NAME = 'Sheet1'
+CURRENT_PRICE = 'CURRENT_PRICE'
+MIN_PRICE = 'MIN_PRICE'
+MAX_PRICE = 'MAX_PRICE'
+CP_COLOR_COL = '__CP_COLOR__'
+COLOR_RED = 'red'
+COLOR_GREEN = 'green'
+COLOR_ORANGE = 'orange'
+OUTPUT_XLSX_FILE = 'output.xlsx'
+
+TOTAL_UNITS = "Total Units"
+UNITS_SOLD_LAST_30_DAYS = "Units Sold Last 30 Days"
+DAYS_ON_HAND = "Days on Hand"
+DEFAULT_DAYS_ON_HAND = 1
+INVALID_DAYS_ON_HAND = "Infinity"

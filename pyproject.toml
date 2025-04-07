@@ -1,0 +1,15 @@
+[project]
+name = "product-details-reader-v2"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "polars >= 1.26.0",
+    "fastexcel",
+    "xlsxwriter>=3.2.2",
+    "openpyxl>=3.1.5",
+]
+[project.optional-dependencies]
+cli = [
+  "pyinstaller",
+]
